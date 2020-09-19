@@ -43,7 +43,6 @@ class CardProduct extends Component {
       <div className="card">
         <div className="img-thumb-prod">
           <img src="https://picsum.photos/200/300" alt="" />
-          {/* <img src="" alt="" /> */}
         </div>
         <p className="product-title">Baju</p>
         <p className="product-price">Rp. 40.000,-</p>
