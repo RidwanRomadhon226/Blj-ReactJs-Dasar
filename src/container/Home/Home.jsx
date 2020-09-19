@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import YouTubeComp from "../../component/YouTubeComp/YouTubeComp";
-import Product from "../Product/Product";
+import BlogPost from "../BlogPost/BlogPost";
+// import YouTubeComp from "../../component/YouTubeComp/YouTubeComp";
+// import LifeCycleComp from "../LifeCycleComp/LifeCycleComp";
+// import Product from "../Product/Product";
 
 class Home extends Component {
   render() {
@@ -13,8 +15,23 @@ class Home extends Component {
       //   <YouTubeComp time="8.80" title="Belajar Laravel" desc="Belajar Asik" />;
       //   <YouTubeComp />;
       // </div>
+      // <div>
+      //   <Product />
+      // </div>
+
+      /* <div>
+          <p>Life Cycle Component</p>
+          <hr />
+        </div>
+
+        <div>
+          <LifeCycleComp />
+        </div> */
+
       <div>
-        <Product />
+        <p>Blog Post</p>
+        <hr />
+        <BlogPost />
       </div>
     );
   }
