@@ -12,6 +12,7 @@ class BlogPost extends Component {
       title: "",
       body: "",
     },
+    isUpdate: false,
   };
 
   getPostApi = () => {
@@ -35,11 +36,40 @@ class BlogPost extends Component {
       (res) => {
         // console.log("Hasil:", res);
         this.getPostApi();
+        this.setState({
+          formBlogPost: {
+            userId: 1,
+            id: "",
+            title: "",
+            body: "",
+          },
+        });
       },
       (err) => {
         console.log(err);
       }
     );
+  };
+
+  putDataToApi = () => {
+    axios
+      .put(
+        `http://localhost:3004/posts/${this.state.formBlogPost.id}`,
+        this.state.formBlogPost
+      )
+      .then((res) => {
+        console.log(res);
+        this.getPostApi();
+        this.setState({
+          isUpdate: false,
+          formBlogPost: {
+            userId: 1,
+            id: "",
+            title: "",
+            body: "",
+          },
+        });
+      });
   };
 
   heandelRemove = (data) => {
@@ -50,12 +80,28 @@ class BlogPost extends Component {
     });
   };
 
+  heandleUpdate = (data) => {
+    console.log("data:", data);
+    this.setState({
+      formBlogPost: data,
+      isUpdate: true,
+    });
+    // axios
+    //   .put(`http://localhost:3004/posts/${data}`, this.state.formBlogPost)
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.getPostApi();
+    //   });
+  };
+
   heandelFormChange = (event) => {
     // console.log("form Change", event.target);
     let formBlogPostNew = { ...this.state.formBlogPost };
     let timestamp = new Date().getTime();
     // console.log("Time :", timestamp);
-    formBlogPostNew["id"] = timestamp;
+    if (!this.state.isUpdate) {
+      formBlogPostNew["id"] = timestamp;
+    }
     // console.log("Target Name:", event.target.name);
     formBlogPostNew[event.target.name] = event.target.value;
     // console.log("form Change Blog Post Awal:", this.state.formBlogPost);
@@ -67,7 +113,11 @@ class BlogPost extends Component {
   };
 
   heandelSubmit = () => {
-    this.postDataToApi();
+    if (this.state.isUpdate) {
+      this.putDataToApi();
+    } else {
+      this.postDataToApi();
+    }
   };
 
   componentDidMount() {
@@ -98,6 +148,7 @@ class BlogPost extends Component {
             type="text"
             name="title"
             placeholder="Add Post"
+            value={this.state.formBlogPost.title}
             onChange={this.heandelFormChange}
           />
           <label htmlFor="body-content">Title</label>
@@ -105,6 +156,7 @@ class BlogPost extends Component {
             name="body"
             id="body"
             cols="30"
+            value={this.state.formBlogPost.body}
             rows="10"
             onChange={this.heandelFormChange}
           ></textarea>
@@ -113,7 +165,14 @@ class BlogPost extends Component {
           </button>
         </div>
         {this.state.post.map((post) => {
-          return <Post key={post.id} data={post} remove={this.heandelRemove} />;
+          return (
+            <Post
+              key={post.id}
+              data={post}
+              remove={this.heandelRemove}
+              update={this.heandleUpdate}
+            />
+          );
         })}
       </Fragment>
     );
