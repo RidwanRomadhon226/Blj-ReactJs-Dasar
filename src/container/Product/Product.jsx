@@ -1,4 +1,3 @@
-import { render } from "@testing-library/react";
 import React, { Component, Fragment } from "react";
 import CardProduct from "../CardProduct/CardProduct";
 import "./Product.css";
@@ -17,6 +16,8 @@ class Product extends Component {
   render() {
     return (
       <Fragment>
+        <p>Product</p>
+        <hr />
         <div className="header">
           <div className="logo">
             <p>Test</p>

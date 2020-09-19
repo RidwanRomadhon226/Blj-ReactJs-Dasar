@@ -142,6 +142,7 @@ class BlogPost extends Component {
     return (
       <Fragment>
         <p>Blog Post</p>
+        <hr />
         <div className="form-add-post">
           <label htmlFor="title">Title</label>
           <input
