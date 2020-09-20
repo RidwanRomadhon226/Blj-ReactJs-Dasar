@@ -1,9 +1,14 @@
+//Lirary
 import React, { Component, Fragment } from "react";
-import BlogPost from "../BlogPost/BlogPost";
-import YouTubeComp from "../../component/YouTubeComp/YouTubeComp";
-import LifeCycleComp from "../LifeCycleComp/LifeCycleComp";
-import Product from "../Product/Product";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
+//Pages
+import BlogPost from "../pages/BlogPost/BlogPost";
+import LifeCycleComp from "../pages/LifeCycleComp/LifeCycleComp";
+import Product from "../pages/Product/Product";
+import YoutubeCompPages from "../pages/YoutubeCompPages/YoutubeCompPages";
+
+//Styling
 import "./Home.css";
 
 class Home extends Component {
@@ -23,7 +28,7 @@ class Home extends Component {
           <Route path="/" exact component={BlogPost} />
           <Route path="/product" component={Product} />
           <Route path="/lifecyclecomp" component={LifeCycleComp} />
-          <Route path="/youtube" component={YouTubeComp} />
+          <Route path="/youtube" component={YoutubeCompPages} />
         </Fragment>
       </Router>
     );
