@@ -5,6 +5,10 @@
   color: #4a4a4a;
 }
 
+.title:hover {
+  cursor: pointer;
+}
+
 .post {
   display: flex;
   border: 1px solid rgba(0, 0, 0, 0.3);

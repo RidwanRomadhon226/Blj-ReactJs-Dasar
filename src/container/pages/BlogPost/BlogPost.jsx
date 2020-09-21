@@ -120,6 +120,10 @@ class BlogPost extends Component {
     }
   };
 
+  heandeDetail = (id) => {
+    this.props.history.push(`/detial-post/${id}`);
+  };
+
   componentDidMount() {
     // fetch("https://jsonplaceholder.typicode.com/posts")
     //   .then((response) => response.json())
@@ -172,6 +176,7 @@ class BlogPost extends Component {
               data={post}
               remove={this.heandelRemove}
               update={this.heandleUpdate}
+              goDetail={this.heandeDetail}
             />
           );
         })}
