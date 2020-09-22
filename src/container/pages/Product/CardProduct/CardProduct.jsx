@@ -55,7 +55,7 @@ class CardProduct extends Component {
             +
           </button>
         </div> */}
-        <Conter onConterChange={(value) => this.props.onConterChange(value)} />
+        <Conter />
       </div>
     );
   }
