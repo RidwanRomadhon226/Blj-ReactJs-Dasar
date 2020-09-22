@@ -1,6 +1,7 @@
 //Lirary
-import React, { Component, Fragment } from "react";
+import React, { Component, Fragment, createContext } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import GlobalProvider from "../../contex/contex";
 
 //Pages
 import BlogPost from "../pages/BlogPost/BlogPost";
@@ -13,9 +14,10 @@ import YoutubeCompPages from "../pages/YoutubeCompPages/YoutubeCompPages";
 import "./Home.css";
 
 class Home extends Component {
-  state = {
-    showComponent: true,
-  };
+  // state = {
+  //   showComponent: true,
+  // };
+
   render() {
     return (
       <Router>
@@ -37,4 +39,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default GlobalProvider(Home);

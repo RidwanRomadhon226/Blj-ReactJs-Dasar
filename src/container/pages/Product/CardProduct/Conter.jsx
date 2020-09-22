@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { GlobalConsumer } from "../../../../contex/contex";
 import ActionType from "../../../../redux/reducer/globalActionType";
+import { RootContex } from "../../../../contex/contex";
 
 class Conter extends Component {
   // state = {
   //   order: 4,
   // };
 
-  heandelConterChange = (newValue) => {
-    this.props.onConterChange(newValue);
-  };
+  // heandelConterChange = (newValue) => {
+  //   this.props.onConterChange(newValue);
+  // };
 
   // headelPlus = () => {
   //   console.log("plus", this);
@@ -40,14 +42,20 @@ class Conter extends Component {
   // };
 
   render() {
-    console.log(this.props);
+    console.log(this);
     return (
       <div className="conter">
-        <button className="minus" onClick={this.props.heandlMinus}>
+        <button
+          className="minus"
+          onClick={() => this.props.dispatch({ type: "MUNIS_ORDER" })}
+        >
           -
         </button>
-        <input type="text" value={this.props.order} />
-        <button className="plus" onClick={this.props.headelPlus}>
+        <input type="text" value={this.props.state.totalOrder} />
+        <button
+          className="plus"
+          onClick={() => this.props.dispatch({ type: "PLUS_ORDER" })}
+        >
           +
         </button>
       </div>
@@ -55,17 +63,18 @@ class Conter extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    order: state.totalOrder,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     order: state.totalOrder,
+//   };
+// };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    headelPlus: () => dispatch({ type: ActionType.PLUS_ORDER }),
-    heandlMinus: () => dispatch({ type: ActionType.MINUS_ORDER }),
-  };
-};
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     headelPlus: () => dispatch({ type: ActionType.PLUS_ORDER }),
+//     heandlMinus: () => dispatch({ type: ActionType.MINUS_ORDER }),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Conter);
+// export default connect(mapStateToProps, mapDispatchToProps)(Conter);
+export default GlobalConsumer(Conter);
