@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import Post from "../../../component/Post/Post";
 import "./BlogPost.css";
 import axios from "axios";
+import API from "../../../services";
 
 class BlogPost extends Component {
   state = {
@@ -13,22 +14,28 @@ class BlogPost extends Component {
       body: "",
     },
     isUpdate: false,
+    comments: [],
   };
 
   getPostApi = () => {
-    axios
-      .get("http://localhost:3004/posts?_sort=id&_order=desc")
-      .then((dtr) => {
-        // console.log(dtr.data);
-        this.setState(
-          {
-            post: dtr.data,
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+    API.getNewsBlog().then((dtr) => {
+      this.setState({
+        post: dtr,
       });
+    });
+
+    API.getComment().then((dtr) => {
+      // console.log("data", dtr);
+      this.setState({
+        comments: dtr,
+      });
+    });
+    // axios
+    //   .get("http://localhost:3004/posts?_sort=id&_order=desc")
+    //   .then((dtr) => {
+    //     // console.log(dtr.data);
+
+    //   });
   };
 
   postDataToApi = () => {
@@ -169,6 +176,13 @@ class BlogPost extends Component {
             Simpan
           </button>
         </div>
+        {this.state.comments.map((comment) => {
+          return (
+            <p key={comment.id}>
+              {comment.name} - {comment.email}
+            </p>
+          );
+        })}
         {this.state.post.map((post) => {
           return (
             <Post
