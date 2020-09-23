@@ -70,32 +70,50 @@ class BlogPost extends Component {
   };
 
   putDataToApi = () => {
-    axios
-      .put(
-        `http://localhost:3004/posts/${this.state.formBlogPost.id}`,
-        this.state.formBlogPost
-      )
-      .then((res) => {
-        console.log(res);
-        this.getPostApi();
-        this.setState({
-          isUpdate: false,
-          formBlogPost: {
-            userId: 1,
-            id: "",
-            title: "",
-            body: "",
-          },
-        });
+    API.updateNewsBlog(
+      this.state.formBlogPost,
+      this.state.formBlogPost.id
+    ).then((res) => {
+      this.getPostApi();
+      this.setState({
+        isUpdate: false,
+        formBlogPost: {
+          userId: 1,
+          id: "",
+          title: "",
+          body: "",
+        },
       });
+    });
+    // axios
+    //   .put(
+    //     `http://localhost:3004/posts/${this.state.formBlogPost.id}`,
+    //     this.state.formBlogPost
+    //   )
+    //   .then((res) => {
+    //     console.log(res);
+    //     this.getPostApi();
+    //     this.setState({
+    //       isUpdate: false,
+    //       formBlogPost: {
+    //         userId: 1,
+    //         id: "",
+    //         title: "",
+    //         body: "",
+    //       },
+    //     });
+    //   });
   };
 
   heandelRemove = (data) => {
-    // console.log(data);
-    axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
-      // console.log(res);
+    API.deleteNewsBlog(data).then((res) => {
       this.getPostApi();
     });
+    // console.log(data);
+    // axios.delete(`http://localhost:3004/posts/${data}`).then((res) => {
+    //   // console.log(res);
+    //   this.getPostApi();
+    // });
   };
 
   heandleUpdate = (data) => {
@@ -173,6 +191,7 @@ class BlogPost extends Component {
             placeholder="Add Post"
             value={this.state.formBlogPost.title}
             onChange={this.heandelFormChange}
+            required
           />
           <label htmlFor="body-content">Title</label>
           <textarea
@@ -182,8 +201,13 @@ class BlogPost extends Component {
             value={this.state.formBlogPost.body}
             rows="10"
             onChange={this.heandelFormChange}
+            required
           ></textarea>
-          <button className="btn-submit" onClick={this.heandelSubmit}>
+          <button
+            type="submit"
+            className="btn-submit"
+            onClick={this.heandelSubmit}
+          >
             Simpan
           </button>
         </div>

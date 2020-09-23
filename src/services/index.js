@@ -2,6 +2,8 @@ import axios from "axios";
 import { OnlineRoot, RootPath } from "./Config";
 import Get from "./Get";
 import Post from "./Post";
+import Put from "./Put";
+import Delete from "./Delete";
 // const RootPath = "http://localhost:3004";
 // const OnlineRoot = "https://jsonplaceholder.typicode.com";
 
@@ -59,10 +61,18 @@ const postNewsBlog = (data) => Post("posts", false, data);
 const getNewsBlog = () => Get("posts?_sort=id&_order=desc", false);
 const getComment = () => Get("comments", true);
 
+//Put
+const updateNewsBlog = (data, id) => Put(`posts/${id}`, false, data);
+
+//Delete
+const deleteNewsBlog = (id) => Delete(`posts/${id}`, false);
+
 const API = {
   postNewsBlog,
   getNewsBlog,
   getComment,
+  updateNewsBlog,
+  deleteNewsBlog,
 };
 
 export default API;
